@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@pkgs/*": ["../../pkgs/*"],
+      "@utils/*": ["../../pkgs/utils/*"],
+      "@shared/*": ["../../pkgs/shared/*"],
+      "@config/*": ["../../pkgs/config/*"],
+      "@db/*": ["./src/db/*"],
+      "@cfg/*": ["./src/config/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@validators/*": ["./src/validators/*"],
+      "@testing/*": ["./src/testing/*"],
+      "@mocks/*": ["./src/testing/mocks/*"],
+      "@const/*": ["./src/constants/*"],
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@permissions/*": ["./src/permissions/*"],
+      "@models/*": ["./src/models/*"],
+      "@orm/*": ["./src/orm/*"]
+    }
+  }
+}

@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  continuous-integration:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      # install dependencies --------------------------------------------------
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Setup global dependencies
+        run: make setup
+
+      - name: Generate prisma types
+        run: make generate-types
+
+      # check commit message --------------------------------------------------
+
+      - name: Check commit message
+        run: make check-commit
+
+      # check code quality ----------------------------------------------------
+
+      - name: Check code quality
+        run: make check
+
+      # start docker compose --------------------------------------------------
+
+      - name: Start Docker Compose service
+        run: make start-test-ci
+
+      - name: Wait for Docker Compose service to be ready
+        run: sleep 20
+
+      # run tests -------------------------------------------------------------
+
+      - name: Run unit tests for the Api
+        run: make test-api
+
+      # - name: Run e2e tests for the Webapp
+      #   run: make test-e2e
+
+      # stop docker-compose ---------------------------------------------------
+
+      - name: Stop Docker Compose service
+        if: always()
+        run: make stop-test

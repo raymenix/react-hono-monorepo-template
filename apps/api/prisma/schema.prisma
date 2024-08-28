@@ -1,0 +1,57 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+enum TokenSubject {
+  Auth
+}
+
+enum Theme {
+  Dark
+  Light
+}
+
+enum InvitationStatus {
+  Pending
+  Accepted
+  Rejected
+}
+
+model User {
+  id String @id @default(cuid())
+
+  email    String @unique
+  username String @unique
+  password String
+
+  firstname String
+  lastname  String
+
+  theme Theme @default(Light)
+
+  activatedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  tokens Token[]
+}
+
+model Token {
+  id String @id @default(cuid())
+
+  value   String
+  subject TokenSubject
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  expiresAt DateTime @default(now()) @updatedAt
+}

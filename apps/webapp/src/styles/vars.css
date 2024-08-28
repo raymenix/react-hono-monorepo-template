@@ -1,0 +1,13 @@
+:root {
+  /* dimensions */
+  --sidebar-max-width: 300px;
+  --sidebar-min-width: 80px;
+
+  --topbar-height: 60px;
+
+  /* z-indexes */
+  --sidebar-z: 20;
+  --topbar-z: 10;
+
+  /* colors */
+}

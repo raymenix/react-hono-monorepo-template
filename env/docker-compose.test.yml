@@ -1,0 +1,13 @@
+services:
+  db:
+    volumes:
+      - ${PROJECT}-db-test:/var/lib/postgresql/data
+  minio:
+    volumes:
+      - ${PROJECT}-minio-db-test:/data
+
+volumes:
+  project-db-test:
+    name: '${PROJECT}-db-test'
+  project-minio-db-test:
+    name: '${PROJECT}-minio-db-test'
