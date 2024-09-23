@@ -5,7 +5,7 @@ services:
     build:
       context: '.'
       dockerfile: pg.dockerfile
-    container_name: ${PROJECT}-db
+    container_name: ${NAME}-db
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
@@ -22,7 +22,7 @@ services:
     stop_grace_period: 1s
     network_mode: host
     image: minio/minio
-    container_name: '${PROJECT}-minio'
+    container_name: '${NAME}-minio'
     environment:
       MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}
       MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}
@@ -33,7 +33,7 @@ services:
   api:
     stop_grace_period: 1s
     network_mode: host
-    container_name: ${PROJECT}-api
+    container_name: ${NAME}-api
     image: bitnami/node:20.10.0
     depends_on:
       - db
@@ -52,7 +52,7 @@ services:
 
   webapp:
     stop_grace_period: 1s
-    container_name: '${PROJECT}-webapp'
+    container_name: '${NAME}-webapp'
     network_mode: host
     image: node:20-alpine
     depends_on:

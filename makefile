@@ -20,8 +20,8 @@ TEST_DOCKER=-f ./env/docker-compose.yml -f ./env/docker-compose.test.yml
 setup:
 	@npm i -g dotenv-cli
 	@npm i -g husky && husky
-	@npm exec --prefix ./apps/webapp playwright install
-	@npm exec --prefix ./apps/webapp playwright install-deps
+	@npm exec --prefix ./apps/webapp playwright@next install-deps
+	@npm exec --prefix ./apps/webapp playwright@next install
 
 install:
 		${USER} npm i
