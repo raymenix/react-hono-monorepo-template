@@ -65,16 +65,16 @@ start-test-ci:
 # ---------------------------------------------
 
 stop-dev:
-		${USER} dotenv ${DEV_ENV} -c -- docker compose down
+		${USER} dotenv ${DEV_ENV} -c -- docker compose ${DEV_DOCKER} down
 
 stop-dev-volume:
-		${USER} dotenv ${DEV_ENV} -c -- docker compose down -v
+		${USER} dotenv ${DEV_ENV} -c -- docker compose ${DEV_DOCKER} down -v
 
 stop-test:
-		${USER} dotenv ${DEV_TEST} -c -- docker compose down
+		${USER} dotenv ${TEST_ENV} -c -- docker compose ${TEST_DOCKER} down
 
 stop-test-volume:
-		${USER} dotenv ${DEV_TEST} -c -- docker compose down -v
+		${USER} dotenv ${TEST_ENV} -c -- docker compose ${TEST_DOCKER} down -v
 
 # ---------------------------------------------
 # DATABASE
